@@ -2,7 +2,7 @@
 <package>
   <name>bb_drive</name>
   <version>0.0.0</version>
-  <description>closed-loop differential drive package for beaglebone black</description>
+  <description>differential drive package for beaglebone black</description>
 
   <maintainer email="yibrenth@gmail.com">Brent Yi</maintainer>
 
