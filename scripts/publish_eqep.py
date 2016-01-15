@@ -78,7 +78,7 @@ while not rospy.is_shutdown():
     # publish twist
     twist = Twist()
     twist.linear.x = (right + left) / 2
-    twist.angular.z = (right - left) / wheel_track
+    twist.angular.z = (right - left) / (wheel_track / 2)
     pub_twist.publish(twist)
 
     # update pose

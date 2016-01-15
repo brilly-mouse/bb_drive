@@ -13,7 +13,7 @@ class control_velocity(object):
         self.right_vel = 0
 
         self.linear_pid = PID(165, 140, 0, 125.83)
-        self.angular_pid = PID(10, 8, 0, 6.25)
+        self.angular_pid = PID(5, 4, 0, 3.125)
 
         self.linear_sign = 1
         self.summer = {-1: 0, 1: 0}
