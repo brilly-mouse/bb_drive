@@ -9,8 +9,8 @@ class motor_interface(object):
         self.wheel_track = rospy.get_param('wheel_track', 0.125)
         self.wheel_diameter = rospy.get_param('wheel_diameter', 0.04)
 
-        self.left_pid = PID(5, 3, 0)
-        self.right_pid = PID(5, 3, 0)
+        self.left_pid = PID(5, 1.5, 0, 2)
+        self.right_pid = PID(5, 1.5, 0, 2)
 
         self.left_set_pub = rospy.Publisher('/wheel_left/setpoint', Float32, queue_size=1)
         self.right_set_pub = rospy.Publisher('/wheel_right/setpoint', Float32, queue_size=1)

@@ -1,10 +1,11 @@
 from time import time
 
 class PID:
-    def __init__(self, Kp, Ki, Kd):
+    def __init__(self, Kp, Ki, Kd, Ff=0):
         self.Kp = Kp
         self.Ki = Ki
         self.Kd = Kd
+        self.Ff = Ff
 
         self.setpoint = None
 
@@ -20,7 +21,7 @@ class PID:
 
         error = self.setpoint - state
 
-        effort = self.Kp * error + self.Ki * self.error_sum
+        effort = self.Kp * error + self.Ki * self.error_sum + self.Ff * self.setpoint
         if self.error_prev != None and time_curr > self.time_prev:
             dt = time_curr - self.time_prev
             effort += (error - self.error_prev) * self.Kd / dt
