@@ -17,8 +17,8 @@ pub_left = rospy.Publisher('/wheel_left/state', Float32, queue_size=1)
 pub_right = rospy.Publisher('/wheel_right/state', Float32, queue_size=1)
 
 # initialiaze eQEPs
-eqep_left = eQEP(eQEP.eQEP0, eQEP.MODE_RELATIVE)
-eqep_right = eQEP(eQEP.eQEP2, eQEP.MODE_RELATIVE)
+eqep_left = eQEP(eQEP.eQEP2, eQEP.MODE_RELATIVE)
+eqep_right = eQEP(eQEP.eQEP0, eQEP.MODE_RELATIVE)
 
 # set update frequency
 frequency = rospy.get_param('frequency', 30)
@@ -35,9 +35,9 @@ while not rospy.is_shutdown():
     # get raw tick count
     left = eqep_left.poll_position()
     right = eqep_right.get_position()
-
+    rospy.loginfo("Left: %s \t Right: %s", left, right)
     # publish in rad/sec
-    pub_left.publish(Float32(left * pi * frequency / ticks_per_rev) * -1)
-    pub_right.publish(Float32(right * pi * frequency / ticks_per_rev))
+    pub_left.publish(Float32(left * pi * frequency / ticks_per_rev))
+    pub_right.publish(Float32(right * pi * frequency / ticks_per_rev * -1))
 
 rospy.loginfo("Exiting...")
