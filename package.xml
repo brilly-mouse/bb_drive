@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <name>bb_drive</name>
+  <version>0.0.0</version>
+  <description>closed-loop differential drive package for beaglebone black</description>
+
+  <maintainer email="yibrenth@gmail.com">Brent Yi</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>std_msgs</run_depend>
+</package>
