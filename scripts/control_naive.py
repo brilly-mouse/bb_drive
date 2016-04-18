@@ -4,13 +4,13 @@ from geometry_msgs.msg import Twist
 from std_msgs.msg import Int16, Float32
 from pid import PID
 
-class motor_interface(object):
+class control_naive(object):
     def __init__(self):
         self.wheel_track = rospy.get_param('wheel_track', 0.125)
         self.wheel_diameter = rospy.get_param('wheel_diameter', 0.04)
 
-        self.left_pid = PID(5, 1.5, 0, 2)
-        self.right_pid = PID(5, 1.5, 0, 2)
+        self.left_pid = PID(4, 0, 0, 3)
+        self.right_pid = PID(4, 0, 0, 3)
 
         self.left_set_pub = rospy.Publisher('/wheel_left/setpoint', Float32, queue_size=1)
         self.right_set_pub = rospy.Publisher('/wheel_right/setpoint', Float32, queue_size=1)
@@ -42,6 +42,6 @@ class motor_interface(object):
         return cb
 
 if __name__ == '__main__':
-    rospy.init_node('drive_loop')
-    motor_interface()
+    rospy.init_node('control_naive')
+    control_naive()
     rospy.spin()
