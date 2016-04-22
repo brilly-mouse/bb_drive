@@ -6,11 +6,11 @@ from pid import PID
 
 class control_naive(object):
     def __init__(self):
-        self.wheel_track = rospy.get_param('wheel_track', 0.125)
+        self.wheel_track = rospy.get_param('wheel_track', 0.108)
         self.wheel_diameter = rospy.get_param('wheel_diameter', 0.04)
 
-        self.left_pid = PID(4, 0, 0, 3)
-        self.right_pid = PID(4, 0, 0, 3)
+        self.left_pid = PID(5, 0, 0, 3)
+        self.right_pid = PID(5, 0, 0, 3)
 
         self.left_set_pub = rospy.Publisher('/wheel_left/setpoint', Float32, queue_size=1)
         self.right_set_pub = rospy.Publisher('/wheel_right/setpoint', Float32, queue_size=1)

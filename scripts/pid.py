@@ -31,3 +31,6 @@ class PID:
         self.time_prev = time_curr
 
         return effort
+
+    def clear_integrator(self):
+        self.error_sum = 0

@@ -15,7 +15,7 @@ for p in [left_f, left_r, right_f, right_r]:
 
 def create_cb(f, r):
     def cb(data):
-        duty = data.data
+        duty = min(100, max(-100, data.data))
         if duty > 0:
             PWM.set_duty_cycle(f, duty)
             PWM.set_duty_cycle(r, 0)
