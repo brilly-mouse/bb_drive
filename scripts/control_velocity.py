@@ -12,8 +12,8 @@ class control_velocity(object):
         self.left_vel = 0
         self.right_vel = 0
 
-        self.linear_pid = PID(250, 50, 0, 100 / 0.93)
-        self.angular_pid = PID(5, 0, 0, 100 / 17.4)
+        self.linear_pid = PID(165, 140, 0, 125.83)
+        self.angular_pid = PID(10, 8, 0, 6.25)
 
         self.linear_sign = 1
         self.summer = {-1: 0, 1: 0}
@@ -34,9 +34,8 @@ class control_velocity(object):
 
         sign = signum(twist.linear.x)
         if sign != 0 and self != self.linear_sign:
-            # self.angular_pid.clear_integrator()
-            self.summer[self.linear_sign] = self.angular_pid.error_sum
-            self.angular_pid.error_sum = self.summer[sign]
+            self.angular_pid.clear_integrator()
+            # self.linear_pid.clear_integrator()
             self.linear_sign = sign
 
         linear = self.linear_pid.calc(twist.linear.x)

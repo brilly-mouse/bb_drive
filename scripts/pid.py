@@ -5,7 +5,8 @@ class PID:
         self.Kp = Kp
         self.Ki = Ki
         self.Kd = Kd
-        self.Ff = Ff
+
+        self.Ff = (Ff) if callable(Ff) else (lambda n: Ff * n)
 
         self.setpoint = None
 
@@ -21,7 +22,7 @@ class PID:
 
         error = self.setpoint - state
 
-        effort = self.Kp * error + self.Ki * self.error_sum + self.Ff * self.setpoint
+        effort = self.Kp * error + self.Ki * self.error_sum + self.Ff(self.setpoint)
         if self.error_prev != None and time_curr > self.time_prev:
             dt = time_curr - self.time_prev
             effort += (error - self.error_prev) * self.Kd / dt
@@ -34,3 +35,13 @@ class PID:
 
     def clear_integrator(self):
         self.error_sum = 0
+
+if __name__ == '__main__':
+    from time import sleep
+    p = PID(0.2, 1, 0)
+    p.setpoint = 20
+    x = 10
+    while True:
+        print int(x) * '.' + int(50 - x) * 'x'
+        x += p.calc(x)
+        sleep(0.1)
