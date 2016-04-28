@@ -10,9 +10,7 @@ left_r = rospy.get_param("left_motor_pin_r", "P8_19")
 right_f = rospy.get_param("right_motor_pin_f", "P9_16")
 right_r = rospy.get_param("right_motor_pin_r", "P9_14")
 
-pins = [left_f, left_r, right_f, right_r]
-
-for p in pins:
+for p in [left_f, left_r, right_f, right_r]:
     PWM.start(p, 0, 20000)
 
 def create_cb(f, r):

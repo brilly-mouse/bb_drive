@@ -1,5 +1,5 @@
 <launch>
-  <node name="publish_eqep" pkg="bb_drive" type="publish_eqep.py" />
+  <node name="odom" pkg="bb_drive" type="odom.py" />
   <node name="motor_interface" pkg="bb_drive" type="motor_interface.py" />
   <node name="control_velocity" pkg="bb_drive" type="control_velocity.py" />
 </launch>
