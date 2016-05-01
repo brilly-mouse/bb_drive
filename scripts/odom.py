@@ -18,7 +18,7 @@ Overlay.apply("bone_eqep0")
 Overlay.apply("bone_eqep2b")
 
 # ros stuff
-rospy.init_node('publish_eqep')
+rospy.init_node('odom_publisher')
 pub_left = rospy.Publisher('/wheel_left/state', Float32, queue_size=1)
 pub_right = rospy.Publisher('/wheel_right/state', Float32, queue_size=1)
 pub_odom = rospy.Publisher('/wheel_odom', Odometry, queue_size=3)

@@ -7,20 +7,11 @@ from pid import PID
 
 class control_velocity(object):
     def __init__(self):
-        self.wheel_track = rospy.get_param('wheel_track', 0.125)
-        self.wheel_diameter = rospy.get_param('wheel_diameter', 0.04)
-
-        self.left_vel = 0
-        self.right_vel = 0
-
-        self.linear_pid = PID(82.5, 70, 0, 62.915)
-        self.angular_pid = PID(5, 4, 0, 3.125)
+        self.linear_pid = PID(95, 85, 1, 62.915)
+        self.angular_pid = PID(6, 4, 0.1, 3.125)
 
         self.linear_pid.setpoint = 0
         self.angular_pid.setpoint = 0
-
-        self.linear_sign = 1
-        self.summer = {-1: 0, 1: 0}
 
         self.left_pub = rospy.Publisher('/wheel_left/duty', Int16, queue_size=1)
         self.right_pub = rospy.Publisher('/wheel_right/duty', Int16, queue_size=1)
@@ -34,11 +25,10 @@ class control_velocity(object):
 
     def update_duty(self, odom):
         twist = odom.twist.twist
-        sign = signum(twist.linear.x)
 
-        if sign != 0 and self != self.linear_sign:
+        if self.linear_pid.setpoint == 0 and self.angular_pid.setpoint == 0:
+            self.linear_pid.clear_integrator()
             self.angular_pid.clear_integrator()
-            self.linear_sign = sign
 
         linear = self.linear_pid.calc(twist.linear.x)
         angular = self.angular_pid.calc(twist.angular.z)
